@@ -1,0 +1,6 @@
+{
+  "name": "Fashion Dreams and Passion",
+  "description": "An elite AI-powered fashion analysis platform. Score outfits against iconic archetypes, chat with legends, find your style DNA, and try on accessories in real time.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

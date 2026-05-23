@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+    <script>
+      // Suppress benign Vite WebSocket and HMR connection error alerts in build workspace
+      (function() {
+        const isBenignWsError = (msg) => {
+          if (!msg) return false;
+          const s = String(msg).toLowerCase();
+          return s.includes('websocket') || s.includes('ws://') || s.includes('wss://') || s.includes('web socket');
+        };
+
+        window.addEventListener('unhandledrejection', (event) => {
+          const reason = event.reason;
+          if (!reason) return;
+          const msg = typeof reason === 'string' ? reason : (reason.message || '');
+          if (isBenignWsError(msg)) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        }, true);
+
+        window.addEventListener('error', (event) => {
+          const msg = event.message || '';
+          if (isBenignWsError(msg) || (event.error && isBenignWsError(event.error.message))) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        }, true);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
